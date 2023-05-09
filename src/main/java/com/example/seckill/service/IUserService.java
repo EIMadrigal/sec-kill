@@ -1,4 +1,4 @@
-package com.example.seckill.service.impl;
+package com.example.seckill.service;
 
 import com.example.seckill.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
