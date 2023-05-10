@@ -32,12 +32,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public RespBean doLogin(LoginVo loginVo) {
         String mobile = loginVo.getMobile();
         String password = loginVo.getPassword();
-        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
-            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
-        }
-        if (!ValidatorUtil.isMobile(mobile)) {
-            return RespBean.error(RespBeanEnum.MOBILE_ERROR);
-        }
+
+        // deleted since IsMobile annotation
+//        if (StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)) {
+//            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+//        }
+//        if (!ValidatorUtil.isMobile(mobile)) {
+//            return RespBean.error(RespBeanEnum.MOBILE_ERROR);
+//        }
+
         User user = userMapper.selectById(mobile);
         if (null == user) {
             return RespBean.error(RespBeanEnum.LOGIN_ERROR);
