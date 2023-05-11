@@ -1,5 +1,6 @@
 package com.example.seckill.service.impl;
 
+import com.example.seckill.exception.GlobalException;
 import com.example.seckill.pojo.User;
 import com.example.seckill.mapper.UserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -43,11 +44,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         User user = userMapper.selectById(mobile);
         if (null == user) {
-            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+            // return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+            throw new GlobalException(RespBeanEnum.LOGIN_ERROR);
         }
         // 二次加密密码是否正确
         if (!MD5Util.deliverPassToDBPass(password, user.getSalt()).equals(user.getPassword())) {
-            return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+            // return RespBean.error(RespBeanEnum.LOGIN_ERROR);
+            throw new GlobalException(RespBeanEnum.LOGIN_ERROR);
         }
         return RespBean.success();
     }
